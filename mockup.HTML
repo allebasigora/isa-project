@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Isabella Gomez — Customer Success & CX Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #c0392b;
+    --red-deep: #922b21;
+    --red-bright: #e74c3c;
+    --red-pale: #f9e0de;
+    --cream: #faf6f0;
+    --cream-dark: #f0e8db;
+    --cream-mid: #e8ddd0;
+    --ink: #1a0a08;
+    --ink-mid: #3d1f1a;
+    --ink-soft: #7a5a55;
+    --white: #ffffff;
+    --border: rgba(26,10,8,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: multiply;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, width 0.25s, height 0.25s, opacity 0.2s;
+    opacity: 0.5;
+  }
+
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 5rem;
+    mix-blend-mode: normal;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  .nav-cta {
+    background: var(--red) !important;
+    color: var(--white) !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 2px;
+  }
+
+  .nav-cta:hover { background: var(--red-deep) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--cream);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: 50%;
+    left: -2%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(140px, 18vw, 220px);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(192,57,43,0.08);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 0;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left {
+    padding: 9rem 4rem 6rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--red);
+  }
+
+  h1.hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  h1.hero-name em {
+    font-style: italic;
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    max-width: 440px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-red {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--red);
+    color: var(--white);
+    padding: 1rem 2.2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-red:hover { background: var(--red-deep); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--ink);
+    padding: 1rem 2.2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { background: var(--ink); color: var(--white); transform: translateY(-2px); }
+
+  .hero-right {
+    padding: 9rem 5rem 6rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--cream-mid);
+    border-radius: 4px;
+    padding: 1.8rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover { transform: translateX(6px); box-shadow: -4px 0 0 var(--red); }
+
+  .stat-card:nth-child(2) { margin-left: 2rem; }
+  .stat-card:nth-child(4) { margin-left: 2rem; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .stat-info strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .stat-info span {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  /* MARQUEE STRIP */
+  .marquee-strip {
+    background: var(--red);
+    padding: 1rem 0;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .marquee-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { padding: 8rem 6rem; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1.2rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--red);
+  }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h2.section-title em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  /* SERVICES */
+  .services { background: var(--cream-dark); }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+
+  .services-sub {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    padding-top: 1rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--cream-mid);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(192,57,43,0.1); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--cream-dark);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+    letter-spacing: -0.03em;
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .service-rule {
+    width: 28px; height: 2px;
+    background: var(--red);
+    margin-bottom: 1.2rem;
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 2rem;
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    background: var(--red-pale);
+    color: var(--red-deep);
+    border-radius: 2px;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .about-left {
+    padding: 8rem 5rem 8rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .about .eyebrow { color: var(--red-bright); }
+  .about .eyebrow::before { background: var(--red-bright); }
+
+  .about h2.section-title { color: var(--white); }
+  .about h2.section-title em { color: var(--red-bright); }
+
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .about-body p { margin-bottom: 1.2rem; }
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-right {
+    background: var(--red);
+    padding: 8rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-right::before {
+    content: '"';
+    position: absolute;
+    top: -40px; right: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .highlight {
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .highlight:hover { background: rgba(255,255,255,0.13); }
+
+  .highlight strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+
+  .highlight span {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--cream); }
+
+  .experience-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .tl-item {
+    background: var(--white);
+    border: 1px solid var(--cream-mid);
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+
+  .tl-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .tl-item:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(192,57,43,0.08); }
+  .tl-item:hover::after { transform: scaleX(1); }
+
+  .tl-item.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .tl-item.featured::after { background: var(--red-bright); }
+
+  .tl-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    background: var(--red);
+    color: var(--white);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .tl-date {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-item.featured .tl-date { color: rgba(255,255,255,0.45); }
+
+  .tl-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .tl-item.featured .tl-role { color: var(--white); font-size: 1.7rem; }
+
+  .tl-company {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .tl-item.featured .tl-company { color: var(--red-bright); }
+
+  .tl-desc {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .tl-item.featured .tl-desc { color: rgba(255,255,255,0.6); }
+
+  /* CONTACT */
+  .contact {
+    background: var(--red);
+    padding: 9rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: 'HELLO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 22vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .contact .eyebrow { color: rgba(255,255,255,0.7); justify-content: center; }
+  .contact .eyebrow::before { background: rgba(255,255,255,0.5); }
+
+  .contact h2.section-title { color: var(--white); position: relative; z-index: 1; }
+  .contact h2.section-title em { color: var(--cream); font-style: italic; }
+
+  .contact-sub {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-cream {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--cream);
+    color: var(--red);
+    padding: 1rem 2.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-cream:hover { background: var(--white); transform: translateY(-2px); }
+
+  .btn-white-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--white);
+    padding: 1rem 2.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-white-outline:hover { background: rgba(255,255,255,0.15); border-color: var(--white); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--red-bright); }
+
+  .footer-note {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag { animation: fadeUp 0.5s ease both; }
+  h1.hero-name { animation: fadeUp 0.5s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.5s 0.2s ease both; }
+  .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+  .stat-card { animation: fadeUp 0.5s ease both; }
+  .stat-card:nth-child(1) { animation-delay: 0.15s; }
+  .stat-card:nth-child(2) { animation-delay: 0.25s; }
+  .stat-card:nth-child(3) { animation-delay: 0.35s; }
+  .stat-card:nth-child(4) { animation-delay: 0.45s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-left { padding: 8rem 2.5rem 3rem; }
+    .hero-right { padding: 2rem 2.5rem 5rem; }
+    section { padding: 5rem 2.5rem; }
+    .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about-left { padding: 5rem 2.5rem; }
+    .about-right { padding: 4rem 2.5rem; }
+    .experience-header { grid-template-columns: 1fr; gap: 1.5rem; }
+    .timeline { grid-template-columns: 1fr; }
+    .tl-item.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem; }
+    .contact { padding: 6rem 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Isabella <span>Gomez</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Work with me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-text">PEOPLE FIRST</div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag">Available for remote engagements</div>
+      <h1 class="hero-name">Isabella<em>Gomez.</em></h1>
+      <p class="hero-desc">Customer Success, CX & Learning professional helping global teams build better relationships — with their customers and with each other.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-red">Work with me &rarr;</a>
+        <a href="#services" class="btn-outline">See my services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-info">
+          <strong>Years in CX & Customer Success</strong>
+          <span>Across support, coaching, sales & consulting</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">40+</div>
+        <div class="stat-info">
+          <strong>Agents coached per month</strong>
+          <span>Post-training field effectiveness, Scotiabank</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">C2</div>
+        <div class="stat-info">
+          <strong>English proficiency</strong>
+          <span>EF SET certified — fluent across all contexts</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-info">
+          <strong>Continents served</strong>
+          <span>North America, Europe & Latin America</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Customer Success <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Coaching & L&D <span class="marquee-dot"></span></span>
+    <span class="marquee-item">CX Consulting <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Remote-First <span class="marquee-dot"></span></span>
+    <span class="marquee-item">C2 English <span class="marquee-dot"></span></span>
+    <span class="marquee-item">People First <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Agent Enablement <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bilingual EN & ES <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Customer Success <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Coaching & L&D <span class="marquee-dot"></span></span>
+    <span class="marquee-item">CX Consulting <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Remote-First <span class="marquee-dot"></span></span>
+    <span class="marquee-item">C2 English <span class="marquee-dot"></span></span>
+    <span class="marquee-item">People First <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Agent Enablement <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bilingual EN & ES <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="eyebrow">What I offer</div>
+      <h2 class="section-title">Three ways I can <em>help you.</em></h2>
+    </div>
+    <p class="services-sub">Whether you need someone to manage your customer relationships, develop your support team, or improve your CX processes — I bring over a decade of hands-on experience in remote, international environments.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <h3 class="service-title">Customer Success & Retention</h3>
+      <div class="service-rule"></div>
+      <p class="service-desc">I build genuine, lasting relationships with your clients — managing the full customer journey from onboarding to renewal, reducing churn, and making sure your users feel supported at every touchpoint.</p>
+      <div class="service-tags">
+        <span class="tag">Account management</span>
+        <span class="tag">Onboarding</span>
+        <span class="tag">Retention</span>
+        <span class="tag">Multi-channel support</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <h3 class="service-title">Coaching & Learning & Development</h3>
+      <div class="service-rule"></div>
+      <p class="service-desc">I take your agents from training into confident, effective production performance. Hands-on, individual — daily check-ins, personalised coaching plans, and structured improvement sessions for those who need extra support.</p>
+      <div class="service-tags">
+        <span class="tag">Agent enablement</span>
+        <span class="tag">Performance coaching</span>
+        <span class="tag">Field effectiveness</span>
+        <span class="tag">L&D programmes</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <h3 class="service-title">CX Consulting & Content</h3>
+      <div class="service-rule"></div>
+      <p class="service-desc">I help you find where your customer experience is breaking down and build processes that hold up at scale. I also produce support documentation, help center content, and bilingual copywriting in English and Spanish.</p>
+      <div class="service-tags">
+        <span class="tag">CX audits</span>
+        <span class="tag">Process design</span>
+        <span class="tag">Copywriting</span>
+        <span class="tag">EN & ES content</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <div class="eyebrow">About me</div>
+    <h2 class="section-title">A decade of putting <em>people first.</em></h2>
+    <div class="about-body">
+      <p>I've spent the last ten years working at the intersection of customer experience and people development — across support, coaching, recruiting, logistics, and sales. The thread connecting all of it: understand what someone needs, and help them get there.</p>
+      <p>I currently work in the cybersecurity sector in a customer success capacity, supporting a technically demanding client base. It's an environment that rewards precision, patience, and the ability to translate complexity into clarity.</p>
+      <p>Earlier in my career at Scotiabank, I was promoted from Customer Service Representative to Field Effectiveness Coach — taking agents after formal training and making sure that transition into live production actually stuck.</p>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="highlight">
+      <strong>Bilingual — C2 English, Native Spanish</strong>
+      <span>EF SET certified. Comfortable working with clients and teams across North America, Europe, and Latin America.</span>
+    </div>
+    <div class="highlight">
+      <strong>Remote-first since 2020</strong>
+      <span>Fully distributed work across multiple time zones, managing international client relationships with autonomy and precision.</span>
+    </div>
+    <div class="highlight">
+      <strong>Coaching 20 to 40 agents per month</strong>
+      <span>At Scotiabank, running personalised coaching plans and performance sessions for cohorts of new and underperforming agents.</span>
+    </div>
+    <div class="highlight">
+      <strong>Cybersecurity & tech sector experience</strong>
+      <span>Currently supporting technically complex products and high-trust client relationships in the cybersecurity industry.</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="experience-header">
+    <div>
+      <div class="eyebrow">Career</div>
+      <h2 class="section-title">Where I've <em>done the work.</em></h2>
+    </div>
+    <p class="services-sub">A decade of roles across industries — each one adding something different to how I think about customers, teams, and performance.</p>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item featured">
+      <div>
+        <div class="tl-badge">Current role</div>
+        <div class="tl-date">Nov 2022 — Present</div>
+        <div class="tl-role">Customer Support Consultant</div>
+        <div class="tl-company">SupportYourApp · Remote</div>
+      </div>
+      <p class="tl-desc">End-to-end support for international clients across chat and email, including escalation management, cross-functional coordination with dev teams, copywriting, and bilingual content production. Rejoined following a previous engagement — brought back based on performance and relationships built.</p>
+    </div>
+
+    <div class="tl-item featured">
+      <div>
+        <div class="tl-badge">Promoted internally</div>
+        <div class="tl-date">Feb 2018 — Aug 2019</div>
+        <div class="tl-role">Field Effectiveness Coach</div>
+        <div class="tl-company">Scotiabank · Bogotá</div>
+      </div>
+      <p class="tl-desc">Post-training role bridging classroom and live production. Coached monthly cohorts of 20 to 40 agents through daily check-ins, individual coaching plans, and structured performance sessions. Promoted from Customer Service Representative within the same team.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Jun 2022 — Oct 2022</div>
+      <div class="tl-role">Talent Acquisition Specialist</div>
+      <div class="tl-company">BairesDev · Remote</div>
+      <p class="tl-desc">Candidate sourcing, assessment, and interview coordination for technical roles across LinkedIn, email, and phone.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Jan 2022 — Jun 2022</div>
+      <div class="tl-role">Track and Trace Specialist</div>
+      <div class="tl-company">MoLo Solutions · Remote</div>
+      <p class="tl-desc">Real-time freight tracking and issue resolution across carriers, dispatchers, and clients to ensure timely delivery.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Oct 2020 — May 2021</div>
+      <div class="tl-role">Customer Support Consultant</div>
+      <div class="tl-company">SupportYourApp · Remote</div>
+      <p class="tl-desc">First engagement — high-volume multi-channel support for international clients. Rehired in 2022 based on performance.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Sep 2019 — Dec 2021</div>
+      <div class="tl-role">Sales Associate</div>
+      <div class="tl-company">Celebrity Cruises & Norwegian Cruise Line</div>
+      <p class="tl-desc">Consultative sales and customer engagement for cruise travel packages across a diverse international clientele.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="eyebrow">Get in touch</div>
+  <h2 class="section-title">Ready to work <em>together?</em></h2>
+  <p class="contact-sub">I'm open to remote engagements in Customer Success, CX Consulting, and Learning & Development with international teams. Let's talk.</p>
+  <div class="contact-actions">
+    <a href="mailto:hello@isabellagomez.com" class="btn-cream">Send me an email &rarr;</a>
+    <a href="https://linkedin.com/in/isabellagomez" target="_blank" class="btn-white-outline">LinkedIn profile</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Isabella <span>Gomez</span></a>
+  <span class="footer-note">Customer Success · CX · Learning & Development · Remote</span>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+      ring.style.opacity = '0.2';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+</script>
+
+</body>
+</html>
