@@ -326,10 +326,10 @@ export default function App() {
           international teams. Let&apos;s talk.
         </p>
         <div className="contact-actions">
-          <a href="mailto:hello@isabellagomez.com" className="btn-cream">
+          <a href="mailto:isa.gomez1096@gmail.com" className="btn-cream">
             Send me an email →
           </a>
-          <a href="https://linkedin.com/in/isabellagomez" className="btn-white-outline" target="_blank" rel="noreferrer">
+          <a href="https://linkedin.com/in/isabellagora" className="btn-white-outline" target="_blank" rel="noreferrer">
             LinkedIn profile
           </a>
         </div>
