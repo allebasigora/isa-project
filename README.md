@@ -49,6 +49,7 @@ If you see *“running scripts is disabled on this system”*, either:
 
 ```
 isa-project/
+├── .github/workflows/deploy-github-pages.yml
 ├── index.html          # Root HTML + font preconnect
 ├── mockup.HTML         # Original static reference
 ├── src/
@@ -62,6 +63,33 @@ isa-project/
 ├── vite.config.ts
 └── package.json
 ```
+
+---
+
+## GitHub Pages
+
+This repo is set up for a **project site**: `https://<your-username>.github.io/<repo-name>/`.
+
+1. Push this project to a GitHub repository (the folder name and `package.json` name can differ; the **repository name** is what matters for the URL).
+2. In the repo on GitHub: **Settings → Pages → Build and deployment**.
+3. Under **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
+4. Merge or push to **`main`** so the workflow in `.github/workflows/deploy-github-pages.yml` runs (or run it manually via **Actions → Deploy to GitHub Pages → Run workflow**).
+
+The workflow builds with `VITE_BASE=/<repo>/` so asset paths match GitHub Pages. After the first successful deploy, the site URL appears in the workflow run and under **Settings → Pages**.
+
+To **simulate the Pages URL locally** after a production build:
+
+```bash
+set VITE_BASE=/your-repo-name/
+npm run build
+npm run preview
+```
+
+(On PowerShell, use `$env:VITE_BASE="/your-repo-name/"; npm run build` instead of `set`.)
+
+**Default branch is not `main`?** Edit the `on.push.branches` list in the workflow file to match your branch.
+
+**User or organization site** (`https://<user>.github.io/` with no repo path): set `base` to `/` by removing or overriding `VITE_BASE` in the workflow (and adjust the workflow to your Pages setup).
 
 ---
 
