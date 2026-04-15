@@ -1,6 +1,25 @@
+import emailjs from '@emailjs/browser';
+import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { CustomCursor } from './components/CustomCursor';
 import './styles/layout.css';
 import './styles/sections.css';
+
+function stripEnvValue(v: string | undefined): string {
+  if (v == null) return '';
+  let s = v.trim();
+  if ((s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"))) {
+    s = s.slice(1, -1).trim();
+  }
+  return s;
+}
+
+function readEmailJsEnv() {
+  const publicKey = stripEnvValue(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  const serviceId = stripEnvValue(import.meta.env.VITE_EMAILJS_SERVICE_ID);
+  const templateId = stripEnvValue(import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+  const configured = Boolean(publicKey && serviceId && templateId);
+  return { publicKey, serviceId, templateId, configured };
+}
 
 const marqueeItems = [
   'Customer Success',
@@ -22,6 +41,128 @@ function MarqueeTrack() {
           {label} <span className="marquee-dot" />
         </span>
       ))}
+    </div>
+  );
+}
+
+function ContactMail() {
+  const { publicKey, serviceId, templateId, configured } = readEmailJsEnv();
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [feedback, setFeedback] = useState<{ kind: 'ok' | 'err'; text: string } | null>(null);
+
+  useEffect(() => {
+    if (configured) {
+      emailjs.init({ publicKey });
+    }
+  }, [configured, publicKey]);
+
+  const handleSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      if (!message.trim() || sending) return;
+      if (!configured) {
+        setFeedback({
+          kind: 'err',
+          text: 'Add your EmailJS service ID and template ID to the environment, restart the dev server, then try again.',
+        });
+        return;
+      }
+      setSending(true);
+      setFeedback(null);
+      try {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            subject: subject.trim() || 'Website inquiry',
+            message: message.trim(),
+            user_email: userEmail.trim(),
+          },
+          { publicKey },
+        );
+        setSubject('');
+        setMessage('');
+        setUserEmail('');
+        setFeedback({ kind: 'ok', text: 'Message sent.' });
+      } catch (err) {
+        const text =
+          err && typeof err === 'object' && 'text' in err && typeof (err as { text?: string }).text === 'string'
+            ? (err as { text: string }).text
+            : err instanceof Error
+              ? err.message
+              : 'Send failed. Check the browser console and EmailJS dashboard.';
+        setFeedback({ kind: 'err', text });
+      } finally {
+        setSending(false);
+      }
+    },
+    [configured, message, publicKey, sending, serviceId, subject, templateId, userEmail],
+  );
+
+  return (
+    <div className="contact-mailbox">
+      <form onSubmit={handleSubmit} noValidate>
+        <label htmlFor="contact-subject" className="contact-label">
+          Subject <span className="contact-label-hint">(optional)</span>
+        </label>
+        <input
+          id="contact-subject"
+          type="text"
+          className="contact-input"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="e.g. Collaboration, role, timeline"
+          autoComplete="off"
+          disabled={sending}
+        />
+
+        <label htmlFor="contact-user-email" className="contact-label contact-label-spaced">
+          Your email <span className="contact-label-hint">(optional, for reply)</span>
+        </label>
+        <input
+          id="contact-user-email"
+          type="email"
+          className="contact-input"
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+          placeholder="you@example.com"
+          autoComplete="email"
+          disabled={sending}
+        />
+
+        <label htmlFor="contact-message" className="contact-label contact-label-spaced">
+          Message
+        </label>
+        <textarea
+          id="contact-message"
+          className="contact-textarea"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Write your message here…"
+          rows={6}
+          spellCheck
+          required
+          disabled={sending}
+        />
+
+        <div className="contact-actions">
+          <button type="submit" className="btn-cream" disabled={!message.trim() || sending || !configured}>
+            {sending ? 'Sending…' : 'Send email'}
+          </button>
+          <a href="https://linkedin.com/in/isabellagora" className="btn-white-outline" target="_blank" rel="noreferrer">
+            LinkedIn profile
+          </a>
+        </div>
+      </form>
+
+      {feedback ? (
+        <p className={`contact-status ${feedback.kind === 'ok' ? 'contact-status--ok' : 'contact-status--err'}`} role="status">
+          {feedback.text}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -325,14 +466,7 @@ export default function App() {
           I&apos;m open to remote engagements in Customer Success, CX Consulting, and Learning & Development with
           international teams. Let&apos;s talk.
         </p>
-        <div className="contact-actions">
-          <a href="mailto:isa.gomez1096@gmail.com" className="btn-cream">
-            Send me an email →
-          </a>
-          <a href="https://linkedin.com/in/isabellagora" className="btn-white-outline" target="_blank" rel="noreferrer">
-            LinkedIn profile
-          </a>
-        </div>
+        <ContactMail />
       </section>
 
       <footer>

@@ -45,7 +45,7 @@ export function CustomCursor() {
     document.addEventListener('mousemove', onMove);
     raf = requestAnimationFrame(animateRing);
 
-    const els = document.querySelectorAll<HTMLElement>('a, button');
+    const els = document.querySelectorAll<HTMLElement>('a, button, textarea, input');
     els.forEach((el) => {
       el.addEventListener('mouseenter', onEnter);
       el.addEventListener('mouseleave', onLeave);

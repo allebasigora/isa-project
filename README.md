@@ -105,6 +105,25 @@ For a **user/org root** site (`https://<user>.github.io/` with `base: /`), overr
 
 ---
 
+## Contact form (EmailJS)
+
+The contact block uses [**@emailjs/browser**](https://www.emailjs.com/) so messages send over HTTPS from the browser — **no `mailto:`**, no OS “pick an app” dialog, and **no custom server** (works on static GitHub Pages).
+
+1. Create a free EmailJS account and add an **email service** (e.g. Gmail) connected to the inbox that should receive messages.
+2. Create an **email template** whose content uses these template variables (names must match):
+   - `{{subject}}`
+   - `{{message}}`
+   - `{{user_email}}` (optional; use in Reply-To or body if you want)
+3. Copy `.env.example` → `.env` and set:
+   - `VITE_EMAILJS_PUBLIC_KEY`
+   - `VITE_EMAILJS_SERVICE_ID`
+   - `VITE_EMAILJS_TEMPLATE_ID`  
+   Restart `npm run dev` after changes (Vite inlines `VITE_*` at build time).
+
+**GitHub Pages:** add the same three names as [repository secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions), matching the workflow `env` block so the production build includes them.
+
+---
+
 ## Build / TypeScript notes
 
 - **`@types/node`** + **`"types": ["node"]`** in `tsconfig.node.json` type-check `vite.config.ts` (`process.env.VITE_BASE`).
