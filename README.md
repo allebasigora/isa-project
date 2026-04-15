@@ -73,7 +73,7 @@ This repo is set up for a **project site**: `https://<your-username>.github.io/<
 1. Push this project to a GitHub repository (the folder name and `package.json` name can differ; the **repository name** is what matters for the URL).
 2. In the repo on GitHub: **Settings → Pages → Build and deployment**.
 3. Under **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
-4. Merge or push to **`main`** so the workflow in `.github/workflows/deploy-github-pages.yml` runs (or run it manually via **Actions → Deploy to GitHub Pages → Run workflow**).
+4. Merge or push to **`master`** so the workflow in `.github/workflows/deploy-github-pages.yml` runs (or run it manually via **Actions → Deploy to GitHub Pages → Run workflow**).
 
 The workflow builds with `VITE_BASE=/<repo>/` so asset paths match GitHub Pages. After the first successful deploy, the site URL appears in the workflow run and under **Settings → Pages**.
 
@@ -87,7 +87,7 @@ npm run preview
 
 (On PowerShell, use `$env:VITE_BASE="/your-repo-name/"; npm run build` instead of `set`.)
 
-**Default branch is not `main`?** Edit the `on.push.branches` list in the workflow file to match your branch.
+**Using a different default branch?** Edit the `on.push.branches` list in `.github/workflows/deploy-github-pages.yml` (it is set to **`master`** here).
 
 **User or organization site** (`https://<user>.github.io/` with no repo path): set `base` to `/` by removing or overriding `VITE_BASE` in the workflow (and adjust the workflow to your Pages setup).
 
